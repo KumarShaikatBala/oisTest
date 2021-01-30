@@ -29,7 +29,8 @@
                                             <div class="form-group">
                                                 <label>Bank</label>
                                                 <select  name="financial_organization_id" v-model="form.financial_organization_id"  class="form-control" :class="{ 'is-invalid': form.errors.has('financial_organization_id') }">
-                                                    <option value="1">City Bank</option>
+                                                   <option value="1">City Bank</option>
+                                                    <option value="1" v-for="item in banks" :value="item">{{item.name}}</option>
                                                 </select>
                                                 <has-error :form="form" field="financial_organization_id"></has-error>
                                             </div>
@@ -225,6 +226,7 @@
                 },*/
         mounted() {
             this.loadAccounts();
+            this.loadBanks();
             Fire.$on('afterCreate',()=>{
                 this.loadAccounts();
             });

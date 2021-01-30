@@ -2045,6 +2045,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2156,6 +2157,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this6 = this;
 
     this.loadAccounts();
+    this.loadBanks();
     Fire.$on('afterCreate', function () {
       _this6.loadAccounts();
     });
@@ -63612,8 +63614,20 @@ var render = function() {
                                           "option",
                                           { attrs: { value: "1" } },
                                           [_vm._v("City Bank")]
-                                        )
-                                      ]
+                                        ),
+                                        _vm._v(" "),
+                                        _vm._l(_vm.banks, function(item) {
+                                          return _c(
+                                            "option",
+                                            {
+                                              attrs: { value: "1" },
+                                              domProps: { value: item }
+                                            },
+                                            [_vm._v(_vm._s(item.name))]
+                                          )
+                                        })
+                                      ],
+                                      2
                                     ),
                                     _vm._v(" "),
                                     _c("has-error", {
