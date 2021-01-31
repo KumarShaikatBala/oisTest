@@ -29,8 +29,7 @@
                                             <div class="form-group">
                                                 <label>Bank</label>
                                                 <select  name="financial_organization_id" v-model="form.financial_organization_id"  class="form-control" :class="{ 'is-invalid': form.errors.has('financial_organization_id') }">
-                                                   <option value="1">City Bank</option>
-                                                    <option value="1" v-for="item in banks" :value="item">{{item.name}}</option>
+                                                    <option  v-for="item in banks" :key="item.id" :value="item.id">{{item.name}}</option>
                                                 </select>
                                                 <has-error :form="form" field="financial_organization_id"></has-error>
                                             </div>
@@ -84,7 +83,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
                         <thead>
@@ -146,12 +144,13 @@
                 $('#addNew').modal('show');
                 this.editMode=false;
             },
+            loadBanks(){
+                axios.get('api/banks').then(({data})=>(this.banks=data)).catch();
+            },
             loadAccounts(){
                 axios.get('api/accounts').then(({data})=>(this.accounts=data.data));
             },
-            loadBanks(){
-                axios.get('api/banks').then(({data})=>(this.banks=data.data));
-            },
+
             createAccount(){
                 this.$Progress.start();
                 this.form.post('api/account')
@@ -229,6 +228,7 @@
             this.loadBanks();
             Fire.$on('afterCreate',()=>{
                 this.loadAccounts();
+                this.loadBanks();
             });
 
         }

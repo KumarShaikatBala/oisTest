@@ -2044,8 +2044,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2072,20 +2070,20 @@ __webpack_require__.r(__webpack_exports__);
       $('#addNew').modal('show');
       this.editMode = false;
     },
-    loadAccounts: function loadAccounts() {
+    loadBanks: function loadBanks() {
       var _this = this;
 
-      axios.get('api/accounts').then(function (_ref) {
+      axios.get('api/banks').then(function (_ref) {
         var data = _ref.data;
-        return _this.accounts = data.data;
-      });
+        return _this.banks = data;
+      })["catch"]();
     },
-    loadBanks: function loadBanks() {
+    loadAccounts: function loadAccounts() {
       var _this2 = this;
 
-      axios.get('api/banks').then(function (_ref2) {
+      axios.get('api/accounts').then(function (_ref2) {
         var data = _ref2.data;
-        return _this2.banks = data.data;
+        return _this2.accounts = data.data;
       });
     },
     createAccount: function createAccount() {
@@ -2160,6 +2158,8 @@ __webpack_require__.r(__webpack_exports__);
     this.loadBanks();
     Fire.$on('afterCreate', function () {
       _this6.loadAccounts();
+
+      _this6.loadBanks();
     });
   }
 });
@@ -63609,25 +63609,17 @@ var render = function() {
                                           }
                                         }
                                       },
-                                      [
-                                        _c(
+                                      _vm._l(_vm.banks, function(item) {
+                                        return _c(
                                           "option",
-                                          { attrs: { value: "1" } },
-                                          [_vm._v("City Bank")]
-                                        ),
-                                        _vm._v(" "),
-                                        _vm._l(_vm.banks, function(item) {
-                                          return _c(
-                                            "option",
-                                            {
-                                              attrs: { value: "1" },
-                                              domProps: { value: item }
-                                            },
-                                            [_vm._v(_vm._s(item.name))]
-                                          )
-                                        })
-                                      ],
-                                      2
+                                          {
+                                            key: item.id,
+                                            domProps: { value: item.id }
+                                          },
+                                          [_vm._v(_vm._s(item.name))]
+                                        )
+                                      }),
+                                      0
                                     ),
                                     _vm._v(" "),
                                     _c("has-error", {
