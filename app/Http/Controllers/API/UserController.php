@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Bank_account;
 use App\Financial_organization;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Accounts;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,7 +21,9 @@ class UserController extends Controller
 
     public function accounts()
     {
-        return Bank_account::with('bank')->latest()->paginate(10);
+        //return Bank_account::with('bank')->latest()->paginate(10);
+        $data=Bank_account::with('bank')->latest()->paginate('10');
+        return Accounts::collection($data);
     }
     public function banks()
     {
